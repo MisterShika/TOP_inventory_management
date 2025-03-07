@@ -4,3 +4,7 @@ async function getAllBirds() {
   const { rows } = await db.query("SELECT * FROM birds");
   return rows;
 }
+
+module.exports = {
+    getAllBirds
+};
