@@ -23,6 +23,16 @@ async function getBirds(req, res) {
     });
 }
 
+async function getFamily(req, res) {
+    const { familyName } = req.params;
+    const family = await db.getAllFamily(familyName);
+    res.render("index", {
+        title: `Birds by Family`,
+        birds: family,
+    });
+}
+
 module.exports = {
     getBirds,
+    getFamily
 };
