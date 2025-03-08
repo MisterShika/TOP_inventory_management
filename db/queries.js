@@ -1,7 +1,28 @@
 const db = require("../db");
 
 async function getAllBirds() {
-  const { rows } = await db.query("SELECT * FROM birds");
+  const { rows } = await db.query(`
+    SELECT 
+        b.id, 
+        b.name, 
+        b.scientific_name, 
+        f.name AS family, 
+        b.size_cm, 
+        b.weight_g, 
+        b.wingspan_cm, 
+        h.habitat_type, 
+        r.range_description, 
+        m.pattern AS migration_pattern, 
+        d.diet_type, 
+        c.status AS conservation_status
+    FROM birds b
+    LEFT JOIN families f ON b.family_id = f.id
+    LEFT JOIN habitats h ON b.habitat_id = h.id
+    LEFT JOIN ranges r ON b.range_id = r.id
+    LEFT JOIN migration_patterns m ON b.migration_pattern_id = m.id
+    LEFT JOIN diets d ON b.diet_id = d.id
+    LEFT JOIN conservation_status c ON b.conservation_status_id = c.id;
+  `);
   return rows;
 }
 

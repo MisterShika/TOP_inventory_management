@@ -9,7 +9,20 @@
     <ul>
         <% if (locals.birds) {%>
             <% birds.forEach(bird => { %>
-                <li>ID: <%= bird.id %>, Name: <%= bird.name %></li>
+                <li>
+                    <span>ID: <%= bird.id %></span> 
+                    <span>Name: <%= bird.name %></span>
+                    <span>Scientific Name: <%= bird.scientific_name %></span>
+                    <span>Family: <%= bird.family %></span>
+                    <span>Size (cm): <%= bird.size_cm %></span>
+                    <span>Weight (g): <%= bird.weight_g %></span>
+                    <span>Wingspan (cm): <%= bird.wingspan_cm %></span>
+                    <span>Habitat: <%= bird.habitat_type %></span>
+                    <span>Range: <%= bird.range_description %></span>
+                    <span>Migration Pattern: <%= bird.migration_pattern %></span>
+                    <span>Diet: <%= bird.diet_type %></span>
+                    <span>Conservation Status: <%= bird.conservation_status %></span>
+                </li>
             <% }); %>
         <% } %>
     </ul>
