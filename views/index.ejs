@@ -6,25 +6,37 @@
     <title><%= title %></title>
 </head>
 <body>
-    <ul>
         <% if (locals.birds) {%>
+            <table>
+            <tr>
+                <th>Name</th>
+                <th>Scientific Name</th>
+                <th>Family</th>
+                <th>Size (cm)</th>
+                <th>Weight (g)</th>
+                <th>Wingspan (cm)</th>
+                <th>Habitat</th>
+                <th>Range</th>
+                <th>Migration Pattern</th>
+                <th>Diet</th>
+                <th>Conservation Status</th>
+            </tr>
             <% birds.forEach(bird => { %>
-                <li>
-                    <span>ID: <%= bird.id %></span> 
-                    <span>Name: <%= bird.name %></span>
-                    <span>Scientific Name: <%= bird.scientific_name %></span>
-                    <span>Family: <%= bird.family %></span>
-                    <span>Size (cm): <%= bird.size_cm %></span>
-                    <span>Weight (g): <%= bird.weight_g %></span>
-                    <span>Wingspan (cm): <%= bird.wingspan_cm %></span>
-                    <span>Habitat: <%= bird.habitat_type %></span>
-                    <span>Range: <%= bird.range_description %></span>
-                    <span>Migration Pattern: <%= bird.migration_pattern %></span>
-                    <span>Diet: <%= bird.diet_type %></span>
-                    <span>Conservation Status: <%= bird.conservation_status %></span>
-                </li>
+                <tr>
+                    <td><%= bird.name %></td>
+                    <td><%= bird.scientific_name %></td>
+                    <td><a href="/family/<%= bird.family %>"><%= bird.family %></a></td>
+                    <td><%= bird.size_cm %></td>
+                    <td><%= bird.weight_g %></td>
+                    <td><%= bird.wingspan_cm %></td>
+                    <td><%= bird.habitat_type %></td>
+                    <td><%= bird.range_description %></td>
+                    <td><%= bird.migration_pattern %></td>
+                    <td><%= bird.diet_type %></td>
+                    <td><%= bird.conservation_status %></td>
+                </tr>
             <% }); %>
+            </table>
         <% } %>
-    </ul>
 </body>
 </html>
