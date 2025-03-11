@@ -29,7 +29,6 @@ async function getAllBirds() {
 }
 
 async function getAllFamily(family) {
-  console.log(family);
   const { rows } = await db.query(
     `${standardSelect} WHERE f.name ILIKE $1`, 
     [`%${family}%`]
@@ -37,7 +36,52 @@ async function getAllFamily(family) {
   return rows;
 }
 
+async function getAllRange(range) {
+  const { rows } = await db.query(
+    `${standardSelect} WHERE r.range_description ILIKE $1`, 
+    [`%${range}%`]
+  );
+  return rows;
+}
+
+async function getAllDiet(diet) {
+  const { rows } = await db.query(
+    `${standardSelect} WHERE d.diet_type ILIKE $1`, 
+    [`%${diet}%`]
+  );
+  return rows;
+}
+
+async function getAllMigration(migration) {
+  const { rows } = await db.query(
+    `${standardSelect} WHERE m.pattern ILIKE $1`, 
+    [`%${migration}%`]
+  );
+  return rows;
+}
+
+async function getAllHabitat(habitat) {
+  const { rows } = await db.query(
+    `${standardSelect} WHERE h.habitat_type ILIKE $1`, 
+    [`%${habitat}%`]
+  );
+  return rows; 
+}
+
+async function getAllConservation(conservation) {
+  const { rows } = await db.query(
+    `${standardSelect} WHERE c.status ILIKE $1`, 
+    [`%${conservation}%`]
+  );
+  return rows; 
+}
+
 module.exports = {
     getAllBirds,
-    getAllFamily
+    getAllFamily,
+    getAllRange,
+    getAllDiet,
+    getAllMigration,
+    getAllHabitat,
+    getAllConservation
 };

@@ -29,11 +29,19 @@
                     <td><%= bird.size_cm %></td>
                     <td><%= bird.weight_g %></td>
                     <td><%= bird.wingspan_cm %></td>
-                    <td><%= bird.habitat_type %></td>
-                    <td><%= bird.range_description %></td>
-                    <td><%= bird.migration_pattern %></td>
-                    <td><%= bird.diet_type %></td>
-                    <td><%= bird.conservation_status %></td>
+                    <td>
+                        <%- bird.habitat_type.split(',').map(function(item) { 
+                            return '<a href="/habitat/' + item.trim() + '">' + item.trim() + '</a>';
+                        }).join(', ') %>
+                    </td>
+                    <td><a href="/range/<%= bird.range_description %>"><%= bird.range_description %></a></td>
+                    <td><a href="/migration/<%= bird.migration_pattern %>"><%= bird.migration_pattern %></a></td>
+                    <td>
+                        <%- bird.diet_type.split(',').map(function(item) { 
+                            return '<a href="/diet/' + item.trim() + '">' + item.trim() + '</a>';
+                        }).join(', ') %>
+                    </td>
+                    <td><a href="/conservation/<%= bird.conservation_status %>"><%= bird.conservation_status %></a></td>
                 </tr>
             <% }); %>
             </table>

@@ -32,7 +32,57 @@ async function getFamily(req, res) {
     });
 }
 
+async function getRange(req, res) {
+    const { rangeName } = req.params;
+    const range = await db.getAllRange(rangeName);
+    res.render("index", {
+        title: `Birds by Range`,
+        birds: range,
+    });
+}
+
+async function getDiet(req, res) {
+    const {dietName} = req.params;
+    const diet = await db.getAllDiet(dietName);
+    res.render("index", {
+        title: `Birds by Diet`,
+        birds: diet,
+    });
+}
+
+async function getMigration(req, res) {
+    const {migrationName} = req.params;
+    const migration = await db.getAllMigration(migrationName);
+    res.render("index", {
+        title: `Birds by Migration Pattern`,
+        birds: migration,
+    });  
+}
+
+async function getHabitat(req, res) {
+    const {habitatName} = req.params;
+    const habitat = await db.getAllHabitat(habitatName);
+    res.render("index", {
+        title: `Birds by Habitat`,
+        birds: habitat,
+    });  
+}
+
+async function getConservation(req, res) {
+    const {conservationName} = req.params;
+    const conservation = await db.getAllConservation(conservationName);
+    res.render("index", {
+        title: `Birds by Conservation Status`,
+        birds: conservation,
+    }); 
+}
+
 module.exports = {
     getBirds,
-    getFamily
+    getFamily,
+    getRange,
+    getDiet,
+    getMigration,
+    getHabitat,
+    getConservation
 };
