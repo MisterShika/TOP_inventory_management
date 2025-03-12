@@ -30,16 +30,36 @@
                     <td><%= bird.weight_g %></td>
                     <td><%= bird.wingspan_cm %></td>
                     <td>
-                        <%- bird.habitat_type.split(',').map(function(item) { 
-                            return '<a href="/habitat/' + item.trim() + '">' + item.trim() + '</a>';
-                        }).join(', ') %>
+                        <% if (bird.habitat_type) { %>
+                            <% if (bird.habitat_type.includes(',')) { %>
+                                <%- bird.habitat_type.split(',').map(function(item) { 
+                                    return '<a href="/habitat/' + item.trim() + '">' + item.trim() + '</a>';
+                                }).join(', ') %>
+                            <% } else { %>
+                                <a href="/habitat/<%= bird.habitat_type.trim() %>">
+                                    <%= bird.habitat_type.trim() %>
+                                </a>
+                            <% } %>
+                        <% } else { %>
+                            <span>N/A</span> <!-- Or leave it empty based on your preference -->
+                        <% } %>
                     </td>
                     <td><a href="/range/<%= bird.range_description %>"><%= bird.range_description %></a></td>
                     <td><a href="/migration/<%= bird.migration_pattern %>"><%= bird.migration_pattern %></a></td>
                     <td>
-                        <%- bird.diet_type.split(',').map(function(item) { 
-                            return '<a href="/diet/' + item.trim() + '">' + item.trim() + '</a>';
-                        }).join(', ') %>
+                        <% if (bird.diet_type) { %>
+                            <% if (bird.diet_type.includes(',')) { %>
+                                <%- bird.diet_type.split(',').map(function(item) { 
+                                    return '<a href="/diet/' + item.trim() + '">' + item.trim() + '</a>';
+                                }).join(', ') %>
+                            <% } else { %>
+                                <a href="/diet/<%= bird.diet_type.trim() %>">
+                                    <%= bird.diet_type.trim() %>
+                                </a>
+                            <% } %>
+                        <% } else { %>
+                            <span>N/A</span> <!-- Or leave it empty if preferred -->
+                        <% } %>
                     </td>
                     <td><a href="/conservation/<%= bird.conservation_status %>"><%= bird.conservation_status %></a></td>
                 </tr>

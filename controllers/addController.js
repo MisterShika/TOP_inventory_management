@@ -6,6 +6,13 @@ async function makeForm(req, res) {
     });
 }
 
+async function postBird(req, res) {
+    const bird = req.body;
+    await db.addBird(bird);
+    res.redirect("/");
+}
+
 module.exports = {
     makeForm,
+    postBird
 };

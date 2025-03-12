@@ -13,5 +13,6 @@ mainRouter.get("/habitat/:habitatName", mainController.getHabitat);
 mainRouter.get("/conservation/:conservationName", mainController.getConservation);
 
 mainRouter.get("/add-birds", addController.makeForm);
+mainRouter.post("/add-birds", addController.postBird);
 
 module.exports = mainRouter;
