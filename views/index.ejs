@@ -20,6 +20,7 @@
                 <th>Migration Pattern</th>
                 <th>Diet</th>
                 <th>Conservation Status</th>
+                <th></th>
             </tr>
             <% birds.forEach(bird => { %>
                 <tr>
@@ -41,7 +42,7 @@
                                 </a>
                             <% } %>
                         <% } else { %>
-                            <span>N/A</span> <!-- Or leave it empty based on your preference -->
+                            <span>N/A</span>
                         <% } %>
                     </td>
                     <td><a href="/range/<%= bird.range_description %>"><%= bird.range_description %></a></td>
@@ -58,10 +59,14 @@
                                 </a>
                             <% } %>
                         <% } else { %>
-                            <span>N/A</span> <!-- Or leave it empty if preferred -->
+                            <span>N/A</span>
                         <% } %>
                     </td>
                     <td><a href="/conservation/<%= bird.conservation_status %>"><%= bird.conservation_status %></a></td>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
                 </tr>
             <% }); %>
             </table>

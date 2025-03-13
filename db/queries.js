@@ -166,6 +166,10 @@ async function addBird(bird) {
   await db.query(standardAdd, params);
 }
 
+async function deleteBird(id) {
+  await pool.query("DELETE FROM birds WHERE b.id = $1", [id]);
+}
+
 module.exports = {
     getAllBirds,
     getAllFamily,
@@ -174,5 +178,6 @@ module.exports = {
     getAllMigration,
     getAllHabitat,
     getAllConservation,
-    addBird
+    addBird,
+    deleteBird
 };
