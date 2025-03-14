@@ -2,7 +2,9 @@ const db = require("../db/queries");
 
 
 async function postUpdate(req, res) {
-    console.log("Update");
+    const bird = req.body;
+    await db.updateBird(bird);
+    res.redirect("/");
 }
 
 async function removeBird(req, res) {
@@ -11,7 +13,17 @@ async function removeBird(req, res) {
     res.redirect("/");
 }
 
+async function editBirdPopulate(req, res) {
+    const birdId = req.params.birdID;
+    const singleBird = await db.getBird(birdId);
+    res.render("editBird", {
+        title: "Single Bird",
+        bird: singleBird,
+    });
+}
+
 module.exports = {
     removeBird,
-    postUpdate
+    postUpdate,
+    editBirdPopulate
 };

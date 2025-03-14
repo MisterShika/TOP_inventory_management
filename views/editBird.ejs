@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit: <%= title %></title>
+</head>
+<body class="single-bird">
+    <% if (locals.bird) {%>
+        <form action="/edit-bird" method="POST">
+            <input type="hidden" name="id" value="<%= bird.id %>">
+
+            <div>
+                <label for="name">Bird Name:</label>
+                <input type="text" id="name" name="name" value="<%= bird.name %>" required>
+            </div>
+            <div>
+                <label for="scientific_name">Scientific Name:</label>
+                <input type="text" id="scientific_name" name="scientific_name" value="<%= bird.scientific_name %>" required>
+            </div>
+            <div>
+                <label for="family">Family:</label>
+                <input type="text" id="family" name="family" value="<%= bird.family %>" required>
+            </div>
+            <div>
+                <label for="size_cm">Size (cm):</label>
+                <input type="number" id="size_cm" name="size_cm" step="0.1" placeholder="Size in cm" value="<%= bird.size_cm %>">
+            </div>
+            <div>
+                <label for="weight_g">Weight (g):</label>
+                <input type="number" id="weight_g" name="weight_g" step="0.1" placeholder="Weight in grams" value="<%= bird.weight_g %>">
+            </div>
+            <div>
+                <label for="wingspan_cm">Wingspan (cm):</label>
+                <input type="number" id="wingspan_cm" name="wingspan_cm" step="0.1" placeholder="Wingspan in cm" value="<%= bird.wingspan_cm %>">
+            </div>
+            <div>
+                <label for="habitat_type">Habitat Type:</label>
+                <input type="text" id="habitat_type" name="habitat_type" value="<%= bird.habitat_type %>" required>
+            </div>
+            <div>
+                <label for="range_description">Range Description:</label>
+                <input type="text" id="range_description" name="range_description" value="<%= bird.range_description %>" required>
+            </div>
+            <div>
+                <label for="migration_pattern">Migration Pattern:</label>
+                <input type="text" id="migration_pattern" name="migration_pattern" placeholder="e.g., Seasonal" value="<%= bird.migration_pattern %>">
+            </div>
+            <div>
+                <label for="diet_type">Diet Type:</label>
+                <input type="text" id="diet_type" name="diet_type" placeholder="e.g., Fish, insects" value="<%= bird.diet_type %>">
+            </div>
+            <div>
+                <label for="conservation_status">Conservation Status:</label>
+                <select id="conservation_status" name="conservation_status">
+                    <option value="Least Concern" <%= bird.conservation_status === 'Least Concern' ? 'selected' : '' %>>Least Concern</option>
+                    <option value="Near Threatened" <%= bird.conservation_status === 'Near Threatened' ? 'selected' : '' %>>Near Threatened</option>
+                    <option value="Vulnerable" <%= bird.conservation_status === 'Vulnerable' ? 'selected' : '' %>>Vulnerable</option>
+                    <option value="Endangered" <%= bird.conservation_status === 'Endangered' ? 'selected' : '' %>>Endangered</option>
+                    <option value="Critically Endangered" <%= bird.conservation_status === 'Critically Endangered' ? 'selected' : '' %>>Critically Endangered</option>
+                    <option value="Extinct in the Wild" <%= bird.conservation_status === 'Extinct in the Wild' ? 'selected' : '' %>>Extinct in the Wild</option>
+                    <option value="Extinct" <%= bird.conservation_status === 'Extinct' ? 'selected' : '' %>>Extinct</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    <% } %>
+</body>
+</html>

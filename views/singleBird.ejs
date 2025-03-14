@@ -5,19 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
 </head>
-<body>
+<body class="single-bird">
     <% if (locals.bird) {%>
         <h1><%= bird.name %></h1>
         <h2><%= bird.scientific_name %></h2>
         <h3><%= bird.family %></h3>
-        <span>Size: <%= bird.size_cm %></span>
-        <span>Weight: <%= bird.weight_g %></span>
-        <span>Wingspan: <%= bird.wingspan_cm %></span>
-        <span>Habitat: <%= bird.habitat_type %></span>
-        <span>Range: <%= bird.range_description %></span>
-        <span>Migration Pattern: <%= bird.migration_pattern %></span>
-        <span>Diet: <%= bird.diet_type %></span>
-        <span>Conservation Status: <%= bird.conservation_status %></span>
+        <div>Size: <%= bird.size_cm %></div>
+        <div>Weight: <%= bird.weight_g %></div>
+        <div>Wingspan: <%= bird.wingspan_cm %></div>
+        <div>Habitat: <%= bird.habitat_type %></div>
+        <div>Range: <%= bird.range_description %></div>
+        <div>Migration Pattern: <%= bird.migration_pattern %></div>
+        <div>Diet: <%= bird.diet_type %></div>
+        <div>Conservation Status: <%= bird.conservation_status %></div>
+        <div>
+            <div><a href="/edit-bird/<%= bird.id %>">Edit</a></div>
+            <div><a href="/delete-bird/<%= bird.id %>">Delete</a></div>
+        </div>
     <% } %>
 </body>
 </html>

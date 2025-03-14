@@ -20,4 +20,7 @@ mainRouter.post("/add-birds", addController.postBird);
 
 mainRouter.get("/delete-bird/:birdID", updateController.removeBird);
 
+mainRouter.get("/edit-bird/:birdID", updateController.editBirdPopulate);
+mainRouter.post("/edit-bird", updateController.postUpdate);
+
 module.exports = mainRouter;

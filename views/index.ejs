@@ -6,71 +6,71 @@
     <title><%= title %></title>
 </head>
 <body>
-        <% if (locals.birds) {%>
-            <table>
+    <% if (locals.birds) {%>
+        <table>
+        <tr>
+            <th>Name</th>
+            <th>Scientific Name</th>
+            <th>Family</th>
+            <th>Size (cm)</th>
+            <th>Weight (g)</th>
+            <th>Wingspan (cm)</th>
+            <th>Habitat</th>
+            <th>Range</th>
+            <th>Migration Pattern</th>
+            <th>Diet</th>
+            <th>Conservation Status</th>
+            <th></th>
+        </tr>
+        <% birds.forEach(bird => { %>
             <tr>
-                <th>Name</th>
-                <th>Scientific Name</th>
-                <th>Family</th>
-                <th>Size (cm)</th>
-                <th>Weight (g)</th>
-                <th>Wingspan (cm)</th>
-                <th>Habitat</th>
-                <th>Range</th>
-                <th>Migration Pattern</th>
-                <th>Diet</th>
-                <th>Conservation Status</th>
-                <th></th>
+                <td><a href="/bird/<%= bird.id %>"><%= bird.name %></a></td>
+                <td><%= bird.scientific_name %></td>
+                <td><a href="/family/<%= bird.family %>"><%= bird.family %></a></td>
+                <td><%= bird.size_cm %></td>
+                <td><%= bird.weight_g %></td>
+                <td><%= bird.wingspan_cm %></td>
+                <td>
+                    <% if (bird.habitat_type) { %>
+                        <% if (bird.habitat_type.includes(',')) { %>
+                            <%- bird.habitat_type.split(',').map(function(item) { 
+                                return '<a href="/habitat/' + item.trim() + '">' + item.trim() + '</a>';
+                            }).join(', ') %>
+                        <% } else { %>
+                            <a href="/habitat/<%= bird.habitat_type.trim() %>">
+                                <%= bird.habitat_type.trim() %>
+                            </a>
+                        <% } %>
+                    <% } else { %>
+                        <span>N/A</span>
+                    <% } %>
+                </td>
+                <td><a href="/range/<%= bird.range_description %>"><%= bird.range_description %></a></td>
+                <td><a href="/migration/<%= bird.migration_pattern %>"><%= bird.migration_pattern %></a></td>
+                <td>
+                    <% if (bird.diet_type) { %>
+                        <% if (bird.diet_type.includes(',')) { %>
+                            <%- bird.diet_type.split(',').map(function(item) { 
+                                return '<a href="/diet/' + item.trim() + '">' + item.trim() + '</a>';
+                            }).join(', ') %>
+                        <% } else { %>
+                            <a href="/diet/<%= bird.diet_type.trim() %>">
+                                <%= bird.diet_type.trim() %>
+                            </a>
+                        <% } %>
+                    <% } else { %>
+                        <span>N/A</span>
+                    <% } %>
+                </td>
+                <td><a href="/conservation/<%= bird.conservation_status %>"><%= bird.conservation_status %></a></td>
+                <td>
+                    <a href="/delete-bird/<%= bird.id %>">Delete</a>
+                    <a href="/edit-bird/<%= bird.id %>">Edit</a>
+                </td>
             </tr>
-            <% birds.forEach(bird => { %>
-                <tr>
-                    <td><a href="/bird/<%= bird.id %>"><%= bird.name %></a></td>
-                    <td><%= bird.scientific_name %></td>
-                    <td><a href="/family/<%= bird.family %>"><%= bird.family %></a></td>
-                    <td><%= bird.size_cm %></td>
-                    <td><%= bird.weight_g %></td>
-                    <td><%= bird.wingspan_cm %></td>
-                    <td>
-                        <% if (bird.habitat_type) { %>
-                            <% if (bird.habitat_type.includes(',')) { %>
-                                <%- bird.habitat_type.split(',').map(function(item) { 
-                                    return '<a href="/habitat/' + item.trim() + '">' + item.trim() + '</a>';
-                                }).join(', ') %>
-                            <% } else { %>
-                                <a href="/habitat/<%= bird.habitat_type.trim() %>">
-                                    <%= bird.habitat_type.trim() %>
-                                </a>
-                            <% } %>
-                        <% } else { %>
-                            <span>N/A</span>
-                        <% } %>
-                    </td>
-                    <td><a href="/range/<%= bird.range_description %>"><%= bird.range_description %></a></td>
-                    <td><a href="/migration/<%= bird.migration_pattern %>"><%= bird.migration_pattern %></a></td>
-                    <td>
-                        <% if (bird.diet_type) { %>
-                            <% if (bird.diet_type.includes(',')) { %>
-                                <%- bird.diet_type.split(',').map(function(item) { 
-                                    return '<a href="/diet/' + item.trim() + '">' + item.trim() + '</a>';
-                                }).join(', ') %>
-                            <% } else { %>
-                                <a href="/diet/<%= bird.diet_type.trim() %>">
-                                    <%= bird.diet_type.trim() %>
-                                </a>
-                            <% } %>
-                        <% } else { %>
-                            <span>N/A</span>
-                        <% } %>
-                    </td>
-                    <td><a href="/conservation/<%= bird.conservation_status %>"><%= bird.conservation_status %></a></td>
-                    <td>
-                        <a href="/delete-bird/<%= bird.id %>">Delete</a>
-                        
-                    </td>
-                </tr>
-            <% }); %>
-            </table>
-        <% } %>
-        <a href="/add-birds">Add Birds</a>
+        <% }); %>
+        </table>
+    <% } %>
+    <a href="/add-birds">Add Birds</a>
 </body>
 </html>
