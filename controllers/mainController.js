@@ -1,25 +1,19 @@
 const db = require("../db/queries");
 
 async function getBirds(req, res) {
-    // if(req.query.search){
-    //     const searchedUser = await db.getUser(req.query.search);
-    //     console.log(searchedUser);
-    //     res.render("index", {
-    //         title: "Search",
-    //         users: searchedUser,
-    //         searchData: true
-    //     });
-    // }else{
-    //     const usernames = await db.getAllUsernames();
-    //     res.render("index", {
-    //         title: "User list",
-    //         users: usernames,
-    //     });
-    // }
     const birdList = await db.getAllBirds();
     res.render("index", {
         title: "Birds",
         birds: birdList,
+    });
+}
+
+async function getSingleBird(req, res) {
+    const birdId = req.params.birdID;
+    const singleBird = await db.getBird(birdId);
+    res.render("singleBird", {
+        title: "Single Bird",
+        bird: singleBird,
     });
 }
 
@@ -79,6 +73,7 @@ async function getConservation(req, res) {
 
 module.exports = {
     getBirds,
+    getSingleBird,
     getFamily,
     getRange,
     getDiet,

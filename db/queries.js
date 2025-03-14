@@ -81,9 +81,91 @@ const standardAdd = `
   RETURNING *;
 `;
 
+const standardUpdate = `
+  WITH 
+  update_family AS (
+      INSERT INTO families (name) 
+      VALUES ($3) 
+      ON CONFLICT (name) DO NOTHING
+      RETURNING id
+  ),
+  update_habitat AS (
+      INSERT INTO habitats (habitat_type) 
+      VALUES ($7) 
+      ON CONFLICT (habitat_type) DO NOTHING
+      RETURNING id
+  ),
+  update_range AS (
+      INSERT INTO ranges (range_description) 
+      VALUES ($8) 
+      ON CONFLICT (range_description) DO NOTHING
+      RETURNING id
+  ),
+  update_migration_pattern AS (
+      INSERT INTO migration_patterns (pattern) 
+      VALUES ($9) 
+      ON CONFLICT (pattern) DO NOTHING
+      RETURNING id
+  ),
+  update_diet AS (
+      INSERT INTO diets (diet_type) 
+      VALUES ($10) 
+      ON CONFLICT (diet_type) DO NOTHING
+      RETURNING id
+  ),
+  update_conservation_status AS (
+      INSERT INTO conservation_status (status) 
+      VALUES ($11) 
+      ON CONFLICT (status) DO NOTHING
+      RETURNING id
+  )
+
+  UPDATE birds
+  SET 
+      name = $1,
+      scientific_name = $2,
+      family_id = COALESCE(
+          (SELECT id FROM update_family), 
+          (SELECT id FROM families WHERE name = $3)
+      ),
+      size_cm = $4,
+      weight_g = $5,
+      wingspan_cm = $6,
+      habitat_id = COALESCE(
+          (SELECT id FROM update_habitat), 
+          (SELECT id FROM habitats WHERE habitat_type = $7)
+      ),
+      range_id = COALESCE(
+          (SELECT id FROM update_range), 
+          (SELECT id FROM ranges WHERE range_description = $8)
+      ),
+      migration_pattern_id = COALESCE(
+          (SELECT id FROM update_migration_pattern), 
+          (SELECT id FROM migration_patterns WHERE pattern = $9)
+      ),
+      diet_id = COALESCE(
+          (SELECT id FROM update_diet), 
+          (SELECT id FROM diets WHERE diet_type = $10)
+      ),
+      conservation_status_id = COALESCE(
+          (SELECT id FROM update_conservation_status), 
+          (SELECT id FROM conservation_status WHERE status = $11)
+      )
+  WHERE id = $12
+  RETURNING *;
+`;
+
 async function getAllBirds() {
   const { rows } = await db.query(standardSelect);
   return rows;
+}
+
+async function getBird(id) {
+  const { rows } = await db.query(
+    `${standardSelect} WHERE b.id = $1`, 
+    [id]
+  );
+  return rows[0];
 }
 
 async function getAllFamily(family) {
@@ -166,12 +248,47 @@ async function addBird(bird) {
   await db.query(standardAdd, params);
 }
 
+async function updateBird(bird) {
+  const {
+    id,
+    name,
+    scientific_name,
+    family,
+    size_cm,
+    weight_g,
+    wingspan_cm,
+    habitat_type,
+    range_description,
+    migration_pattern,
+    diet_type,
+    conservation_status
+  } = bird;
+
+  const params = [
+    name,
+    scientific_name,
+    family,
+    size_cm,
+    weight_g,
+    wingspan_cm,
+    habitat_type,
+    range_description,
+    migration_pattern,
+    diet_type,
+    conservation_status,
+    id
+  ];
+
+  await db.query(standardUpdate, params);
+}
+
 async function deleteBird(id) {
   await db.query("DELETE FROM birds WHERE id = $1", [id]);
 }
 
 module.exports = {
     getAllBirds,
+    getBird,
     getAllFamily,
     getAllRange,
     getAllDiet,
@@ -179,5 +296,6 @@ module.exports = {
     getAllHabitat,
     getAllConservation,
     addBird,
+    updateBird,
     deleteBird
 };

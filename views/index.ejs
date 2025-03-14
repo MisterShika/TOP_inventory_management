@@ -24,7 +24,7 @@
             </tr>
             <% birds.forEach(bird => { %>
                 <tr>
-                    <td><%= bird.name %></td>
+                    <td><a href="/bird/<%= bird.id %>"><%= bird.name %></a></td>
                     <td><%= bird.scientific_name %></td>
                     <td><a href="/family/<%= bird.family %>"><%= bird.family %></a></td>
                     <td><%= bird.size_cm %></td>

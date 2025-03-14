@@ -6,6 +6,18 @@
     <title><%= title %></title>
 </head>
 <body>
-    Single Bird
+    <% if (locals.bird) {%>
+        <h1><%= bird.name %></h1>
+        <h2><%= bird.scientific_name %></h2>
+        <h3><%= bird.family %></h3>
+        <span>Size: <%= bird.size_cm %></span>
+        <span>Weight: <%= bird.weight_g %></span>
+        <span>Wingspan: <%= bird.wingspan_cm %></span>
+        <span>Habitat: <%= bird.habitat_type %></span>
+        <span>Range: <%= bird.range_description %></span>
+        <span>Migration Pattern: <%= bird.migration_pattern %></span>
+        <span>Diet: <%= bird.diet_type %></span>
+        <span>Conservation Status: <%= bird.conservation_status %></span>
+    <% } %>
 </body>
 </html>

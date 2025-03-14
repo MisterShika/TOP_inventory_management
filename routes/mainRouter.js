@@ -6,6 +6,8 @@ const mainRouter = Router();
 
 mainRouter.get("/", mainController.getBirds);
 
+mainRouter.get("/bird/:birdID", mainController.getSingleBird);
+
 mainRouter.get("/family/:familyName", mainController.getFamily);
 mainRouter.get("/range/:rangeName", mainController.getRange);
 mainRouter.get("/diet/:dietName", mainController.getDiet);

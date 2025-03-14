@@ -1,6 +1,7 @@
 const db = require("../db/queries");
 
-async function updateBird(req, res) {
+
+async function postUpdate(req, res) {
     console.log("Update");
 }
 
@@ -12,5 +13,5 @@ async function removeBird(req, res) {
 
 module.exports = {
     removeBird,
-    updateBird
+    postUpdate
 };
