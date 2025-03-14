@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const mainController = require("../controllers/mainController");
 const addController = require("../controllers/addController");
+const updateController = require("../controllers/updateController");
 const mainRouter = Router();
 
 mainRouter.get("/", mainController.getBirds);
@@ -14,5 +15,7 @@ mainRouter.get("/conservation/:conservationName", mainController.getConservation
 
 mainRouter.get("/add-birds", addController.makeForm);
 mainRouter.post("/add-birds", addController.postBird);
+
+mainRouter.get("/delete-bird/:birdID", updateController.removeBird);
 
 module.exports = mainRouter;

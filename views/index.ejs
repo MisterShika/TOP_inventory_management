@@ -64,8 +64,8 @@
                     </td>
                     <td><a href="/conservation/<%= bird.conservation_status %>"><%= bird.conservation_status %></a></td>
                     <td>
-                        <button>Edit</button>
-                        <button>Delete</button>
+                        <a href="/delete-bird/<%= bird.id %>">Delete</a>
+                        
                     </td>
                 </tr>
             <% }); %>

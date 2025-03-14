@@ -167,7 +167,7 @@ async function addBird(bird) {
 }
 
 async function deleteBird(id) {
-  await pool.query("DELETE FROM birds WHERE b.id = $1", [id]);
+  await db.query("DELETE FROM birds WHERE id = $1", [id]);
 }
 
 module.exports = {

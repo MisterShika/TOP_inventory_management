@@ -4,13 +4,13 @@ async function updateBird(req, res) {
     console.log("Update");
 }
 
-async function deleteBird(req, res) {
-    const bird = req.body;
-    await db.addBird(bird);
+async function removeBird(req, res) {
+    const bird = req.params.birdID;
+    await db.deleteBird(bird);
     res.redirect("/");
 }
 
 module.exports = {
-    deleteBird,
+    removeBird,
     updateBird
 };
